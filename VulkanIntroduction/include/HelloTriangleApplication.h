@@ -34,11 +34,18 @@ private:
 	void cleanup();
 
 	bool checkValidationLayerSupport();
+	std::vector<const char*> getRequiredExtensions();
+
+	void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
+	void setupDebugMessenger();
+	static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
+		VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
+		VkDebugUtilsMessageTypeFlagsEXT messageType,
+		const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
+		void* pUserData);
 
 	GLFWwindow* window;
-	uint32_t glfwExtensionCount;
 
 	VkInstance instance;
-	VkApplicationInfo appInfo{};
-	VkInstanceCreateInfo createInfo{};
+	VkDebugUtilsMessengerEXT debugMessenger;
 };
